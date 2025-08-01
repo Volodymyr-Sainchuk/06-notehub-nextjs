@@ -8,7 +8,6 @@ interface ModalProps {
 }
 
 export default function Modal({ onClose, children }: ModalProps) {
-  console.log("🚀 ~ Modal ~ document:", document);
   const modalRoot = document.body!;
 
   useEffect(() => {
