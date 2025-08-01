@@ -3,8 +3,8 @@ import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query
 import NoteDetailsClient from "./NoteDetails.client";
 
 type Props = {
-  params: { id: string };
-  searchParams?: { [key: string]: string | string[] | undefined };
+  params: Record<string, string>;
+  searchParams?: Record<string, string | string[] | undefined>;
 };
 
 export default async function NoteDetails({ params }: Props) {
