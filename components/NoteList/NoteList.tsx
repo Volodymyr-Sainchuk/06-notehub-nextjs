@@ -12,6 +12,7 @@ export interface NoteListProps {
 export default function NoteList({ notes }: NoteListProps) {
   const deleteMutation = useDeleteNote();
   const queryClient = useQueryClient();
+  console.log(queryClient);
 
   const handleDelete = (note: Note) => {
     if (window.confirm(`Видалити нотатку "${note.title}"?`)) {
