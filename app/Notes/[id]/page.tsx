@@ -6,11 +6,11 @@ type Props = { params: { id: string } };
 
 export default async function NoteDetails({ params }: Props) {
   const queryClient = new QueryClient();
-  const noteId = Number(params.id);
+  const noteId = String(params.id);
 
   await queryClient.prefetchQuery({
     queryKey: ["note", noteId],
-    queryFn: () => fetchNoteById(params.id),
+    queryFn: () => fetchNoteById(noteId),
   });
 
   return (
