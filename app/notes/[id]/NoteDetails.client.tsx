@@ -16,6 +16,7 @@ export default function NoteDetailsClient() {
   } = useQuery({
     queryKey: ["note", noteId],
     queryFn: () => fetchNoteById(noteId),
+    refetchOnMount: false,
   });
 
   if (isLoading) return <p>Loading, please wait...</p>;
@@ -25,7 +26,7 @@ export default function NoteDetailsClient() {
     <div className={css.container}>
       <div className={css.item}>
         <div className={css.header}>
-          <h2>Note title -{note?.title}</h2>
+          <h2>Note title - {note?.title}</h2>
         </div>
         <p className={css.content}>{note?.content}</p>
         <p className={css.date}>{note?.createdAt}</p>
