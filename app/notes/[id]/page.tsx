@@ -1,8 +1,9 @@
 import { fetchNoteById } from "@/lib/api";
 import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query";
 import NoteDetailsClient from "./NoteDetails.client";
+import { PageProps } from "@/.next/types/app/page";
 
-type Props = {
+type Props = PageProps & {
   params: { id: string };
 };
 
