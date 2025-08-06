@@ -1,4 +1,5 @@
 "use client";
+
 import { useState } from "react";
 import { useDebounce } from "use-debounce";
 import { useQuery } from "@tanstack/react-query";
@@ -12,11 +13,7 @@ import NoteForm from "@/components/NoteForm/NoteForm";
 import { fetchNotes, type FetchNotesResponse } from "@/lib/api";
 import css from "../page.module.css";
 
-interface NotesProps {
-  initialData: FetchNotesResponse;
-}
-
-export default function Notes({ initialData }: NotesProps) {
+export default function Notes() {
   const [searchTerm, setSearchTerm] = useState("");
   const [debouncedSearchTerm] = useDebounce(searchTerm, 500);
 
@@ -30,7 +27,6 @@ export default function Notes({ initialData }: NotesProps) {
     queryKey: ["notes", debouncedSearchTerm, currentPage],
     queryFn: () => fetchNotes({ query: debouncedSearchTerm, page: currentPage, perPage: 12 }),
     placeholderData: (prev) => prev,
-    initialData: debouncedSearchTerm === "" && currentPage === 1 ? initialData : undefined,
   });
 
   const handleSearch = (newValue: string) => {
