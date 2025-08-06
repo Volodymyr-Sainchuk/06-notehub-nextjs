@@ -13,19 +13,22 @@ import NoteForm from "@/components/NoteForm/NoteForm";
 import { fetchNotes, type FetchNotesResponse } from "@/lib/api";
 import css from "../page.module.css";
 
-export default function Notes() {
+type Props = {
+  initialData: FetchNotesResponse;
+};
+
+export default function Notes({ initialData }: Props) {
   const [searchTerm, setSearchTerm] = useState("");
   const [debouncedSearchTerm] = useDebounce(searchTerm, 500);
-
   const [currentPage, setCurrentPage] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const openModal = () => setIsModalOpen(true);
-  const closeModal = () => setIsModalOpen(false);
+  const isInitial = debouncedSearchTerm.trim() === "" && currentPage === 1;
 
   const { data, isPending } = useQuery<FetchNotesResponse>({
     queryKey: ["notes", debouncedSearchTerm, currentPage],
     queryFn: () => fetchNotes({ query: debouncedSearchTerm, page: currentPage, perPage: 12 }),
+    initialData: isInitial ? initialData : undefined,
     placeholderData: (prev) => prev,
   });
 
@@ -33,6 +36,9 @@ export default function Notes() {
     setSearchTerm(newValue);
     setCurrentPage(1);
   };
+
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
 
   return (
     <div className={css.app}>
