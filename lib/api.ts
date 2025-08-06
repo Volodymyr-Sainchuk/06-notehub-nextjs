@@ -10,7 +10,7 @@ export interface FetchNotesResponse {
 }
 
 const API_BASE = "https://notehub-public.goit.study/api/notes";
-const token = process.env.NEXT_PUBLIC_NOTEHUB_TOKEN;
+const token = process.env.NOTEHUB_TOKEN;
 
 const axiosInstance = axios.create({
   baseURL: API_BASE,
