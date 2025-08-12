@@ -6,7 +6,7 @@ type Props = Promise<{
   params: { id: string };
 }>;
 
-export default async function NoteDetails(props: Props) {
+export async function NoteDetails(props: Props) {
   const { params } = await props;
   const noteId = params.id;
   console.log(params);
