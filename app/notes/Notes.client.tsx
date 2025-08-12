@@ -23,13 +23,11 @@ export default function Notes({ initialData }: Props) {
   const [currentPage, setCurrentPage] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const isInitial = debouncedSearchTerm.trim() === "" && currentPage === 1;
-
   const { data, isPending } = useQuery<FetchNotesResponse>({
     queryKey: ["notes", debouncedSearchTerm, currentPage],
     queryFn: () => fetchNotes({ query: debouncedSearchTerm, page: currentPage, perPage: 12 }),
-    initialData: isInitial ? initialData : undefined,
-    placeholderData: (prev) => prev,
+    placeholderData: initialData,
+    refetchOnMount: false,
   });
 
   const handleSearch = (newValue: string) => {
