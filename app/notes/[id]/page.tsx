@@ -9,6 +9,7 @@ type Props = Promise<{
 export default async function NoteDetails(props: Props) {
   const { params } = await props;
   const noteId = params.id;
+  console.log(params);
 
   const queryClient = new QueryClient();
 
